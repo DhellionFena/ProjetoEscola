@@ -1,46 +1,72 @@
-<div *ngIf="!alunoSelecionado">
-  <app-titulo [titulo]="titulo"></app-titulo>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Sobrenome</th>
-        <th scope="col">Telefone</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let aluno of alunos" style="cursor: pointer;" (click)="setAlunoSelecionado(aluno)">
-        <th scope="row">{{aluno.id}}</th>
-        <td>{{aluno.nome}}</td>
-        <td>{{aluno.sobrenome}}</td>
-        <td>{{aluno.telefone}}</td>
-      </tr>
-    </tbody>
-  </table>
-  <br>
-
-  <p>Nenhum aluno selecionado.<br>Por favor selecione um aluno a partir da tabela.</p>
-</div>
-<div *ngIf="alunoSelecionado">
-  <div class="d-flex justify-content-between w-100">
-    <app-titulo [titulo]="alunoSelecionado"></app-titulo>
-    <button class="btn btn-secondary h-25 mt-3" (click)="setAlunoSelecionado('')">Voltar</button>
+<div class="row">
+  <div [ngClass]="{'col-sm-6': alunoSelecionado, 'col-sm-12': !alunoSelecionado}">
+    <app-titulo [titulo]="titulo"></app-titulo>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Sobrenome</th>
+          <th scope="col">Telefone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let aluno of alunos"
+          style="cursor: pointer"
+          (click)="setAlunoSelecionado(aluno)"
+        >
+          <th scope="row">{{ aluno.id }}</th>
+          <td>{{ aluno.nome }}</td>
+          <td>{{ aluno.sobrenome }}</td>
+          <td>{{ aluno.telefone }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
   </div>
+  <div *ngIf="alunoSelecionado" class="col-sm-6">
+    <div class="d-flex justify-content-between w-100">
+      <h2 class="mt-5">
+        {{alunoSelecionado.nome + " " + alunoSelecionado.sobrenome}}
+      </h2>
+      <button
+        class="btn btn-outline-danger h-25 mt-5"
+        (click)="setAlunoSelecionado(null)"
+      >
+        Fechar
+      </button>
+    </div>
 
-  <form>
-    <div class="mb-3">
-      <label for="inputNome" class="form-label">Nome</label>
-      <input type="text" class="form-control" id="inputNome">
-    </div>
-    <div class="mb-3">
-      <label for="inputSobrenome" class="form-label">Sobrenome</label>
-      <input type="text" class="form-control" id="inputSobrenome">
-    </div>
-    <div class="mb-3">
-      <label for="inputTel" class="form-label">Telefone</label>
-      <input type="text" class="form-control" id="inputTel">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+    <form>
+      <div class="mb-3">
+        <label for="inputNome" class="form-label">Nome</label>
+        <input
+          type="text"
+          class="form-control"
+          value="{{ alunoSelecionado.nome }}"
+          id="inputNome"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="inputSobrenome" class="form-label">Sobrenome</label>
+        <input
+          type="text"
+          class="form-control"
+          value="{{ alunoSelecionado.sobrenome }}"
+          id="inputSobrenome"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="inputTel" class="form-label">Telefone</label>
+        <input
+          type="text"
+          class="form-control"
+          value="{{ alunoSelecionado.telefone }}"
+          id="inputTel"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+  </div>
 </div>
