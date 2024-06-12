@@ -1,4 +1,19 @@
-<app-titulo [titulo]="titulo"></app-titulo>
-<ul>
-  <li *ngFor="let professor of professores">{{professor.nome}}</li>
-</ul>
+<div *ngIf="!profSelecionado">
+  <app-titulo [titulo]="titulo"></app-titulo>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Disciplina</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prof of professores" style="cursor: pointer;">
+        <th scope="row">{{prof.id}}</th>
+        <td>{{prof.nome + " " + prof.sobrenome}}</td>
+        <td>{{prof.disciplina}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

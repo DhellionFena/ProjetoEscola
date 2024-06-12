@@ -12,12 +12,18 @@ export class AlunosComponent implements OnInit {
     {id: 1, nome: 'Antônio', sobrenome: 'Azevedo', telefone: 32893003},
     {id: 2, nome: 'Giullia', sobrenome: 'Fukuchima', telefone: 32893003},
     {id: 3, nome: 'Angélica', sobrenome: 'Oliveira', telefone: 32893003},
-    {id: 4, nome: 'João', sobrenome: 'de Oliveira', telefone: 32893003},
+    {id: 4, nome: 'João', sobrenome: 'de Lima', telefone: 32893003},
     {id: 5, nome: 'Daniel', sobrenome: 'Barbosa', telefone: 32893003},
     {id: 6, nome: 'Francielle', sobrenome: 'Cardoso', telefone: 32893003},
     {id: 7, nome: 'Victor', sobrenome: 'Winitskowski', telefone: 32893003},
     {id: 8, nome: 'René', sobrenome: 'Marques', telefone: 32893003}
   ];
+
+  public alunoSelecionado : string = "";
+
+  setAlunoSelecionado(aluno : any) {
+    this.alunoSelecionado = aluno.nome;
+  }
 
   constructor() { }
 
