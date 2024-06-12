@@ -23,9 +23,24 @@
   <p>Nenhum aluno selecionado.<br>Por favor selecione um aluno a partir da tabela.</p>
 </div>
 <div *ngIf="alunoSelecionado">
-  <app-titulo [titulo]="alunoSelecionado"></app-titulo>
-  <p>
-    Aluno Escolhido: {{alunoSelecionado}}
-  </p>
-  <button class="btn btn-secondary" (click)="setAlunoSelecionado('')">Voltar</button>
+  <div class="d-flex justify-content-between w-100">
+    <app-titulo [titulo]="alunoSelecionado"></app-titulo>
+    <button class="btn btn-secondary h-25 mt-3" (click)="setAlunoSelecionado('')">Voltar</button>
+  </div>
+
+  <form>
+    <div class="mb-3">
+      <label for="inputNome" class="form-label">Nome</label>
+      <input type="text" class="form-control" id="inputNome">
+    </div>
+    <div class="mb-3">
+      <label for="inputSobrenome" class="form-label">Sobrenome</label>
+      <input type="text" class="form-control" id="inputSobrenome">
+    </div>
+    <div class="mb-3">
+      <label for="inputTel" class="form-label">Telefone</label>
+      <input type="text" class="form-control" id="inputTel">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>

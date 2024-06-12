@@ -15,10 +15,10 @@ export class ProfessoresComponent implements OnInit {
     {id: 4, nome: 'Rita', sobrenome: "Carvalho", disciplina: "Programação"}
   ];
 
-  public profSelecionado : object = {};
+  public profSelecionado : string = "";
 
   setProfSelecionado(prof : any) {
-    this.profSelecionado = prof
+    this.profSelecionado = prof.nome
   }
 
   constructor() { }

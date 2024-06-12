@@ -9,11 +9,38 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let prof of professores" style="cursor: pointer;">
+      <tr *ngFor="let prof of professores" style="cursor: pointer;" (click)="setProfSelecionado(prof)">
         <th scope="row">{{prof.id}}</th>
         <td>{{prof.nome + " " + prof.sobrenome}}</td>
         <td>{{prof.disciplina}}</td>
       </tr>
     </tbody>
   </table>
+  <p>Nenhum professor selecionado.<br>Por favor selecione um professor a partir da tabela.</p>
+</div>
+<div *ngIf="profSelecionado">
+  <div class="d-flex justify-content-between w-100">
+    <app-titulo [titulo]="profSelecionado"></app-titulo>
+    <button class="btn btn-secondary h-25 mt-3" (click)="setProfSelecionado('')">Voltar</button>
+  </div>
+
+  <form>
+    <div class="row mb-3">
+      <div class="col">
+        <label for="inputNome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="inputNome">
+      </div>
+      <div class="col">
+        <label for="inputSobrenome" class="form-label">Sobrenome</label>
+        <input type="text" class="form-control" id="inputSobrenome">
+      </div>
+    </div>
+    <div>
+      <div class="mb-3">
+        <label for="inputTel" class="form-label">Disciplina</label>
+        <input type="text" class="form-control" id="inputTel">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>
