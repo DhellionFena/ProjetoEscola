@@ -47,6 +47,4 @@ export class ProfessoresComponent implements OnInit {
     console.log(this.profForm.value)
   }
 
-
-
 }

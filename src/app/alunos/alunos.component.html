@@ -26,7 +26,7 @@
           <td class="col-3">{{ aluno.sobrenome }}</td>
           <td class="col-3">{{ aluno.telefone }}</td>
           <td class="col-2">
-            <button class="btn-sm btn btn-outline-primary" *ngIf="!alunoSelecionado" (click)="setAlunoSelecionado(aluno)">
+            <button class="btn-sm btn btn-outline-primary" *ngIf="!alunoSelecionado" (click)="openModal(template)">
               Professores
             </button>
           </td>
@@ -80,3 +80,14 @@
     </form>
   </div>
 </div>
+
+<ng-template #template>
+  <div class="modal-body">
+    <app-professores></app-professores>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn-outline-secondary btn" aria-label="Close" (click)="modalRef?.hide()">
+      FECHAR
+    </button>
+  </div>
+</ng-template>
