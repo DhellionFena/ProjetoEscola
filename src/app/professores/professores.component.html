@@ -27,20 +27,20 @@
       <h2 class="mt-5">{{profSelecionado.nome}}</h2>
       <button
         class="btn btn-outline-danger h-25 mt-5"
-        (click)="setProfSelecionado(null)"
+        (click)="deselectProf()"
       >
         Fechar
       </button>
     </div>
 
-    <form>
+    <form [formGroup]="profForm" (submit)="submitProfessorForm()">
       <div class="row mb-3">
         <div class="col">
           <label for="inputNome" class="form-label">Nome</label>
           <input
             type="text"
             class="form-control"
-            value="{{ profSelecionado.nome }}"
+            formControlName="nome"
             id="inputNome"
           />
         </div>
@@ -49,7 +49,7 @@
           <input
             type="text"
             class="form-control"
-            value="{{ profSelecionado.sobrenome }}"
+            formControlName="sobrenome"
             id="inputSobrenome"
           />
         </div>
@@ -60,7 +60,7 @@
           <input
             type="text"
             class="form-control"
-            value="{{ profSelecionado.disciplina }}"
+            formControlName="disciplina"
             id="inputTel"
           />
         </div>

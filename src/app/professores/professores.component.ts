@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Professor } from '../models/Professor';
 
@@ -17,14 +18,35 @@ export class ProfessoresComponent implements OnInit {
   ];
 
   public profSelecionado : Professor | null;
+  public profForm : FormGroup;
 
-  setProfSelecionado(prof : Professor | null) {
+  setProfSelecionado(prof : Professor) {
     this.profSelecionado = prof
+    this.profForm.patchValue(prof)
   }
 
-  constructor() { }
+  deselectProf() {
+    this.profSelecionado = null;
+  }
+  constructor(private fb : FormBuilder) {
+    this.createProfessorForm()
+  }
 
   ngOnInit(): void {
   }
+
+  createProfessorForm() {
+    this.profForm = this.fb.group({
+      nome: ['', Validators.required],
+      sobrenome: ['', Validators.required],
+      disciplina: ['', Validators.required],
+    })
+  }
+
+  submitProfessorForm() {
+    console.log(this.profForm.value)
+  }
+
+
 
 }
