@@ -1,5 +1,5 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Professor } from '../models/Professor';
 
 @Component({
@@ -10,6 +10,7 @@ import { Professor } from '../models/Professor';
 export class ProfessoresComponent implements OnInit {
 
   public titulo = "Lista de Professores";
+  @Input() disable = false;
   public professores = [
     {id: 1, nome: 'Carlos', sobrenome: "Mattos", disciplina: "Português"},
     {id: 2, nome: 'Cerise', sobrenome: "Mendonça", disciplina: "Matemática"},
@@ -21,8 +22,10 @@ export class ProfessoresComponent implements OnInit {
   public profForm : FormGroup;
 
   setProfSelecionado(prof : Professor) {
-    this.profSelecionado = prof
-    this.profForm.patchValue(prof)
+    if (!this.disable) {
+      this.profSelecionado = prof
+      this.profForm.patchValue(prof)
+    }
   }
 
   deselectProf() {

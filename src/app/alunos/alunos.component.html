@@ -83,7 +83,7 @@
 
 <ng-template #template>
   <div class="modal-body">
-    <app-professores></app-professores>
+    <app-professores [disable]="true"></app-professores>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn-outline-secondary btn" aria-label="Close" (click)="modalRef?.hide()">
