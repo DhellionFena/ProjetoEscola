@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Aluno } from '../models/Aluno';
+import { AlunoService } from './aluno.service';
 
 @Component({
   selector: 'app-alunos',
@@ -13,26 +14,44 @@ export class AlunosComponent implements OnInit {
   //criando formulário de aluno
   public alunoForm : FormGroup;
   public titulo = "Lista de Alunos";
-  public alunos = [
-    {id: 1, nome: 'Antônio', sobrenome: 'Azevedo', telefone: 32893003},
-    {id: 2, nome: 'Giullia', sobrenome: 'Fukuchima', telefone: 32893003},
-    {id: 3, nome: 'Angélica', sobrenome: 'Oliveira', telefone: 32893003},
-    {id: 4, nome: 'João', sobrenome: 'de Lima', telefone: 32893003},
-    {id: 5, nome: 'Daniel', sobrenome: 'Barbosa', telefone: 32893003},
-    {id: 6, nome: 'Francielle', sobrenome: 'Cardoso', telefone: 32893003},
-    {id: 7, nome: 'Victor', sobrenome: 'Winitskowski', telefone: 32893003},
-    {id: 8, nome: 'René', sobrenome: 'Marques', telefone: 32893003}
-  ];
+  public alunos : Aluno[];
 
-  constructor(private fb : FormBuilder, private modalService: BsModalService) {
+  constructor(
+    private fb : FormBuilder,
+    private modalService: BsModalService,
+    private alunoService: AlunoService
+    ) {
     this.createAlunoForm()
   }
 
   ngOnInit(): void {
+    this.loadAlunos();
+  }
+
+  loadAlunos() {
+    this.alunoService.getAll().subscribe(
+      (alunos: Aluno[]) => {
+        this.alunos = alunos;
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+
+  saveAluno(aluno: Aluno) {
+    this.alunoService.update(aluno.id, aluno).subscribe(
+      (model: Aluno) => {
+        console.log(model);
+        this.loadAlunos();
+      },
+      (err : any) => console.error(err)
+    )
   }
 
   createAlunoForm() {
     this.alunoForm = this.fb.group({
+      id: [''],
       nome: ['', Validators.required],
       sobrenome: ['', Validators.required],
       telefone: ['', Validators.required],
@@ -40,7 +59,7 @@ export class AlunosComponent implements OnInit {
   }
 
   submitAlunoForm() {
-    console.log(this.alunoForm.value)
+    this.saveAluno(this.alunoForm.value);
   }
 
   public alunoSelecionado : Aluno | null;
