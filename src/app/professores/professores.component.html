@@ -17,7 +17,7 @@
         >
           <th scope="row">{{ prof.id }}</th>
           <td>{{ prof.nome + " " + prof.sobrenome }}</td>
-          <td>{{ prof.disciplina }}</td>
+          <td>{{ prof.disciplinas[0].nome }}</td>
         </tr>
       </tbody>
     </table>
@@ -60,12 +60,12 @@
           <input
             type="text"
             class="form-control"
-            formControlName="disciplina"
+            formControlName="disciplinas"
             id="inputTel"
           />
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!profForm.valid">Salvar</button>
     </form>
   </div>
 </div>

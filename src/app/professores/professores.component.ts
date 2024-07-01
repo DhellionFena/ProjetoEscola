@@ -1,3 +1,4 @@
+import { ProfessorService } from './professor.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { Professor } from '../models/Professor';
@@ -11,12 +12,7 @@ export class ProfessoresComponent implements OnInit {
 
   public titulo = "Lista de Professores";
   @Input() disable = false;
-  public professores = [
-    {id: 1, nome: 'Carlos', sobrenome: "Mattos", disciplina: "Português"},
-    {id: 2, nome: 'Cerise', sobrenome: "Mendonça", disciplina: "Matemática"},
-    {id: 3, nome: 'Victor', sobrenome: "Winitskowski", disciplina: "Música"},
-    {id: 4, nome: 'Rita', sobrenome: "Carvalho", disciplina: "Programação"}
-  ];
+  public professores : Professor[];
 
   public profSelecionado : Professor | null;
   public profForm : FormGroup;
@@ -31,18 +27,32 @@ export class ProfessoresComponent implements OnInit {
   deselectProf() {
     this.profSelecionado = null;
   }
-  constructor(private fb : FormBuilder) {
+  constructor(
+    private fb : FormBuilder,
+    private profService: ProfessorService
+    ) {
     this.createProfessorForm()
   }
 
   ngOnInit(): void {
+    this.loadProfessores();
+  }
+
+  loadProfessores() {
+    this.profService.getAll().subscribe(
+      professores => {
+        this.professores = professores;
+        console.log(this.professores)
+      },
+      err => { console.error(err) }
+    );
   }
 
   createProfessorForm() {
     this.profForm = this.fb.group({
       nome: ['', Validators.required],
       sobrenome: ['', Validators.required],
-      disciplina: ['', Validators.required],
+      disciplinas: ['', Validators.required],
     })
   }
 
